@@ -54,6 +54,8 @@ export async function updateFacility(facility) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(facility)
     })
+    // 404/405 means no API is deployed (e.g. static hosting); fall back to browser storage.
+    if (response.status === 404 || response.status === 405) throw new Error('Facility API unavailable.')
     if (!response.ok) {
       const error = new Error(`Facility API returned ${response.status}.`)
       error.status = response.status

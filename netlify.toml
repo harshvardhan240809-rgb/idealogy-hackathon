@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# The Express API (server.js) only runs locally; on Netlify the app uses browser storage.
+[[redirects]]
+  from = "/api/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
